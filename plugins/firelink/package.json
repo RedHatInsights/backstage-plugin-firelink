@@ -12,7 +12,10 @@
   },
   "backstage": {
     "role": "frontend-plugin",
-    "pluginId": "firelink"
+    "pluginId": "firelink",
+    "pluginPackages": [
+      "@internal/backstage-plugin-firelink"
+    ]
   },
   "sideEffects": false,
   "scripts": {
@@ -23,6 +26,7 @@
     "clean": "backstage-cli package clean",
     "prepack": "backstage-cli package prepack",
     "postpack": "backstage-cli package postpack",
+    "repo-fix": "backstage-cli repo fix --publish",
     "export-dynamic": "janus-cli package export-dynamic-plugin"
   },
   "dependencies": {

@@ -6,5 +6,5 @@ rm *.tgz
 npm pack
 cd ../..
 rm *.tgz
-mv plugins/visual-qontract/*.tgz .
+mv plugins/firelink/*.tgz .
 shasum -a 256 *.tgz | awk '{print $1}' | xxd -r -p | base64
