@@ -3,6 +3,8 @@
 
 catalog/
 
+*.tgz
+
 # Logs
 logs
 *.log
