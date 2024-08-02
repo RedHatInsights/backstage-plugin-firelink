@@ -1,11 +1,11 @@
 {
   "name": "internal.backstage-plugin-firelink",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "extensions": [],
   "registrationMethod": "callback",
   "baseURL": "auto",
   "loadScripts": [
-    "internal.backstage-plugin-firelink.6436fde4d5a70ac778f1.js"
+    "internal.backstage-plugin-firelink.523dcd482f188008552b.js"
   ],
-  "buildHash": "6436fde4d5a70ac778f1ab614802b60f"
+  "buildHash": "523dcd482f188008552b9221890b811b"
 }

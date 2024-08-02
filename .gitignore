@@ -5,6 +5,9 @@ catalog/
 
 *.tgz
 
+plugins/firelink/dist-scalprum/
+plugins/firelink/dist/
+
 # Logs
 logs
 *.log

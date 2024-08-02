@@ -1,13 +1,21 @@
-# [Backstage](https://backstage.io)
+# [Firelink Plugin]
 
-This is your newly scaffolded Backstage App, Good Luck!
+This is the development monorepo for the [Firelink](https://github.com/RedHatInsights/firelink-frontend) plugin for Backstage / Janus IDP / RHDH. This plugin provides an overview of namespaces on an ephemeral cluster managed by the [Ephemeral Namespace Operator](https://github.com/RedHatInsights/ephemeral-namespace-operator), and then links out to Firelink and the Hybrid Cloud Console on an Ephemeral Cluster to do work.
 
-To start the app, run:
+## Requirements
+* An ephemeral cluster running on OpenShift, managed by the Ephemeral Namespace Operator
+* API access to said ephemeral cluster
+* Firelink deployed in your environment and configured for that same ephemeral cluster
+
+## Development
+It is recommended you use Node 18 when running and developing this, though other versions may work.
 
 ```sh
 yarn install
 yarn dev
 ```
+Then navigate to `http://localhost:3000/firelink` in your browser. The code for the plugin is located in `plugins/firelink` in the monorepo.
+
 ## Configuration
 You'll need to set 4 environment variables for the plugin to function:
 
@@ -42,3 +50,6 @@ proxy:
         Authorization: "Bearer ${FIRELINK_EPHEMERAL_API_TOKEN}"
       changeOrigin: true
 ```
+
+## Dynamic Plugin Config for RHDH
+TODO
