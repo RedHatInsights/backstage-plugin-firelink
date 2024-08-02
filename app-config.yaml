@@ -2,6 +2,10 @@ app:
   title: Scaffolded Backstage App
   baseUrl: http://localhost:3000
 
+  firelink:
+    firelinkUrl: ${FIRELINK_APP_URL}
+    ephemeralUrl: ${FIRELINK_EPHEMERAL_CONSOLE_URL}
+
 organization:
   name: My Company
 
@@ -13,6 +17,7 @@ backend:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
   baseUrl: http://localhost:7007
+
   listen:
     port: 7007
     # Uncomment the following host directive to bind to specific interfaces
@@ -46,11 +51,13 @@ integrations:
 proxy:
   endpoints:
     "/ephemeral":
-      target: "${EPHEMERAL_URL}"
+      target: "${FIRELINK_EPHEMERAL_API_URL}"
       credentials: dangerously-allow-unauthenticated
       headers:
-        Authorization: "Bearer ${EPHEMERAL_TOKEN}"
+        Authorization: "Bearer ${FIRELINK_EPHEMERAL_API_TOKEN}"
       changeOrigin: true
+
+
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
