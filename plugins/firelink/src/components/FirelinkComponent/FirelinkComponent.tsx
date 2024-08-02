@@ -73,7 +73,9 @@ export const FirelinkComponent = () => {
         setNamespacesLoading(false);
       })
       .catch(error => {
-        setError(new Error(`Error fetching namespaces: ${response.statusText}`));
+        setError(
+          new Error(`Error fetching namespaces: ${response.statusText}`),
+        );
         console.error('Error:', error);
       });
   }
@@ -175,10 +177,7 @@ export const FirelinkComponent = () => {
   };
 
   const reserveNamespace = () => {
-    window.open(
-      `${firelinkUrl}/namespace/reserve`,
-      '_blank',
-    );
+    window.open(`${firelinkUrl}/namespace/reserve`, '_blank');
   };
 
   const NamespaceTable = () => {
@@ -226,20 +225,18 @@ export const FirelinkComponent = () => {
       <Content>
         <ContentHeader title="Ephemeral Namespaces">
           {namespacesLoading || namespaceReservationsLoading ? null : (
-            <Button onClick={refresh}>Refresh</Button>
+            <Button onClick={refresh}>
+              <Typography variant="button">Refresh</Typography>
+            </Button>
           )}
-          <Button onClick={reserveNamespace}>Reserve</Button>
-          <Button
-            href={`${firelinkUrl}/apps/deploy`}
-            target="_blank"
-          >
-            Deploy
+          <Button onClick={reserveNamespace}>
+            <Typography variant="button">Reserve</Typography>
           </Button>
-          <Button 
-            href={`${ephemeralUrl}/oauth/token/display`}
-            target="_blank"
-          >
-            Login Command
+          <Button href={`${firelinkUrl}/apps/deploy`} target="_blank">
+            <Typography variant="button">Deploy</Typography>
+          </Button>
+          <Button href={`${ephemeralUrl}/oauth/token/display`} target="_blank">
+            <Typography variant="button">Login Token</Typography>
           </Button>
         </ContentHeader>
         {namespacesLoading || namespaceReservationsLoading ? (
