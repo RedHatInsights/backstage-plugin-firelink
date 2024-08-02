@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Paper, Tooltip, Button, Grid } from '@material-ui/core';
+import { Typography, Paper, Tooltip, Button, Grid, CardHeader, Card, CardContent } from '@material-ui/core';
 import {
   Header,
   Page,
@@ -73,10 +73,9 @@ export const FirelinkComponent = () => {
         setNamespacesLoading(false);
       })
       .catch(error => {
-        setError(
-          new Error(`Error fetching namespaces: ${response.statusText}`),
-        );
+        setError(new Error(`Error fetching namespaces: ${error.message}`));
         console.error('Error:', error);
+        setNamespacesLoading(false);
       });
   }
 
@@ -85,7 +84,7 @@ export const FirelinkComponent = () => {
     const apiUrl = `${proxyUrl}/apis/cloud.redhat.com/v1alpha1/namespacereservations`;
     fetch(apiUrl)
       .then(response => {
-        if (!response.ok) {
+        if (!response.ok || !response) {
           throw new Error(
             `Error fetching NamespaceReservations: ${response.statusText}`,
           );
@@ -98,11 +97,8 @@ export const FirelinkComponent = () => {
       })
       .catch(error => {
         console.error('Error:', error);
-        setError(
-          new Error(
-            `Error fetching NamespaceReservations: ${response.statusText}`,
-          ),
-        );
+        setError(new Error(`Error fetching namespaces: ${error.message}`));
+        setNamespaceReservationsLoading(false);
       });
   }
 
@@ -110,10 +106,6 @@ export const FirelinkComponent = () => {
     getEphemeralNamespaces();
     getNamespaceReservations();
   }, []);
-
-  if (error) {
-    return <Typography variant="body1">Error: {error.message}</Typography>;
-  }
 
   const getReservationForNamespace = namespace => {
     return namespaceReservations.items.find(
@@ -219,6 +211,27 @@ export const FirelinkComponent = () => {
     );
   };
 
+  const ErrorCard = ({ error }) => {
+    return (
+      <Card variant="outlined">
+        <CardHeader title="Error" />
+        <CardContent>
+          <Typography color="error">{error.message}</Typography>
+        </CardContent>
+      </Card>
+    );
+  };
+
+  const ContentPrimaryArea = () => {
+    if (error) {
+      return <ErrorCard error={error} />;
+    }
+    if (namespacesLoading || namespaceReservationsLoading) {
+      return <LinearProgress />;
+    }
+    return <NamespaceTable />;
+  };
+
   return (
     <Page themeId="tool">
       <Header title="Firelink"></Header>
@@ -239,11 +252,7 @@ export const FirelinkComponent = () => {
             <Typography variant="button">Login Token</Typography>
           </Button>
         </ContentHeader>
-        {namespacesLoading || namespaceReservationsLoading ? (
-          <LinearProgress />
-        ) : (
-          <NamespaceTable />
-        )}
+        <ContentPrimaryArea />
       </Content>
     </Page>
   );
