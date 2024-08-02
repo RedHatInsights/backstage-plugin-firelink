@@ -1,4 +1,5 @@
 # Firelink Plugin
+![Screenshot](docs/screenshot.png)
 
 This is the development monorepo for the [Firelink](https://github.com/RedHatInsights/firelink-frontend) plugin for Backstage / Janus IDP / RHDH. This plugin provides an overview of namespaces on an ephemeral cluster managed by the [Ephemeral Namespace Operator](https://github.com/RedHatInsights/ephemeral-namespace-operator), and then links out to Firelink and the Hybrid Cloud Console on an Ephemeral Cluster to do work.
 
@@ -69,3 +70,4 @@ pluginConfig:
                 icon: 'kind:resource'
                 text: Firelink
 ```
+
