@@ -1,4 +1,4 @@
-# [Firelink Plugin]
+# Firelink Plugin
 
 This is the development monorepo for the [Firelink](https://github.com/RedHatInsights/firelink-frontend) plugin for Backstage / Janus IDP / RHDH. This plugin provides an overview of namespaces on an ephemeral cluster managed by the [Ephemeral Namespace Operator](https://github.com/RedHatInsights/ephemeral-namespace-operator), and then links out to Firelink and the Hybrid Cloud Console on an Ephemeral Cluster to do work.
 
@@ -52,4 +52,20 @@ proxy:
 ```
 
 ## Dynamic Plugin Config for RHDH
-TODO
+Add the following to your dynamic plugin config:
+
+```yaml
+- package: "https://github.com/RedHatInsights/backstage-plugin-firelink/releases/download/<TAG>/<TARBALL>"
+disabled: false
+integrity: "sha256-<INTEGRITY>"
+pluginConfig:
+    dynamicPlugins:
+    frontend:
+        redhatinsights.backstage-plugin-firelink:
+        dynamicRoutes:
+            - path: /firelink
+            importName: FirelinkPage
+            menuItem:
+                icon: 'kind:resource'
+                text: Firelink
+```

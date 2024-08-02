@@ -9,6 +9,11 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "outDir": "dist-types",
-    "rootDir": "."
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@redhatinsights/backstage-plugin-firelink": ["./plugins/firelink"]
+    },
+    "moduleResolution": "Bundler",
   }
 }

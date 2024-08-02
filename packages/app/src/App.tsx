@@ -36,7 +36,7 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { FirelinkPage } from '@internal/backstage-plugin-firelink';
+import { FirelinkPage } from '@redhatinsights/backstage-plugin-firelink';
 
 const app = createApp({
   apis,
