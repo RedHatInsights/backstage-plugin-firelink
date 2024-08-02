@@ -1,11 +1,11 @@
 {
-  "name": "internal.backstage-plugin-firelink",
+  "name": "redhatinsights.backstage-plugin-firelink",
   "version": "0.1.2",
   "extensions": [],
   "registrationMethod": "callback",
   "baseURL": "auto",
   "loadScripts": [
-    "internal.backstage-plugin-firelink.523dcd482f188008552b.js"
+    "redhatinsights.backstage-plugin-firelink.8837a32fcf6eb5ac282e.js"
   ],
-  "buildHash": "523dcd482f188008552b9221890b811b"
+  "buildHash": "8837a32fcf6eb5ac282ecec362d7d2b4"
 }
