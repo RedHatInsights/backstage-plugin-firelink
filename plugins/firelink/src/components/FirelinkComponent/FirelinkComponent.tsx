@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Paper, Tooltip, Button, Grid, CardHeader, Card, CardContent } from '@material-ui/core';
+import {
+  Typography,
+  Paper,
+  Tooltip,
+  Button,
+  Grid,
+  CardHeader,
+  Card,
+  CardContent,
+} from '@material-ui/core';
 import {
   Header,
   Page,
@@ -35,6 +44,8 @@ export const FirelinkComponent = () => {
   const [namespaceReservationsLoading, setNamespaceReservationsLoading] =
     useState(true);
   const [error, setError] = useState(null);
+  const [showTokenButton, setShowTokenButton] = useState(true);
+  const [tokenURL, setTokenURL] = useState('');
 
   const TruncatedText = ({ text, max }) => {
     if (text.length <= max) {
@@ -105,6 +116,7 @@ export const FirelinkComponent = () => {
   useEffect(() => {
     getEphemeralNamespaces();
     getNamespaceReservations();
+    makeTokenURL();
   }, []);
 
   const getReservationForNamespace = namespace => {
@@ -172,6 +184,28 @@ export const FirelinkComponent = () => {
     window.open(`${firelinkUrl}/namespace/reserve`, '_blank');
   };
 
+  const makeTokenURL = () => {
+    setShowTokenButton(false);
+    // Use a regular expression to capture the parts of the URL
+    const regex = /^https:\/\/console-([^\.]+)\.apps\.(.*)$/;
+    const match = ephemeralUrl.match(regex);
+
+    if (match) {
+      const subdomain = match[1];
+      const rest = match[2];
+      // Replace 'console' with 'oauth' in the subdomain part
+      const newSubdomain = subdomain.replace('-console', '');
+      // https://oauth-openshift.apps.crc-eph.r9lp.p1.openshiftapps.com/oauth/authorize?client_id=openshift-browser-client&redirect_uri=https%253A%252F%252Foauth-openshift.apps.crc-eph.r9lp.p1.openshiftapps.com%252Foau
+      setTokenURL(`https://oauth-${newSubdomain}.apps.${rest}/oauth/token/display`);
+      setShowTokenButton(true);
+    } else {
+      console.log(
+        'Error: makeTokenURL() - Unable to create token URL from ephemeral URL',
+      );
+      setShowTokenButton(false);
+    }
+  };
+
   const NamespaceTable = () => {
     return (
       <TableContainer component={Paper}>
@@ -232,6 +266,17 @@ export const FirelinkComponent = () => {
     return <NamespaceTable />;
   };
 
+  const TokenButton = () => {
+    if (!showTokenButton) {
+      return null;
+    }
+    return (
+      <Button href={`${tokenURL}`} target="_blank">
+        <Typography variant="button">Login Token</Typography>
+      </Button>
+    );
+  };
+
   return (
     <Page themeId="tool">
       <Header title="Firelink"></Header>
@@ -248,9 +293,7 @@ export const FirelinkComponent = () => {
           <Button href={`${firelinkUrl}/apps/deploy`} target="_blank">
             <Typography variant="button">Deploy</Typography>
           </Button>
-          <Button href={`${ephemeralUrl}/oauth/token/display`} target="_blank">
-            <Typography variant="button">Login Token</Typography>
-          </Button>
+          <TokenButton />
         </ContentHeader>
         <ContentPrimaryArea />
       </Content>
