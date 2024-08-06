@@ -195,7 +195,6 @@ export const FirelinkComponent = () => {
       const rest = match[2];
       // Replace 'console' with 'oauth' in the subdomain part
       const newSubdomain = subdomain.replace('-console', '');
-      // https://oauth-openshift.apps.crc-eph.r9lp.p1.openshiftapps.com/oauth/authorize?client_id=openshift-browser-client&redirect_uri=https%253A%252F%252Foauth-openshift.apps.crc-eph.r9lp.p1.openshiftapps.com%252Foau
       setTokenURL(`https://oauth-${newSubdomain}.apps.${rest}/oauth/token/display`);
       setShowTokenButton(true);
     } else {
@@ -272,7 +271,7 @@ export const FirelinkComponent = () => {
     }
     return (
       <Button href={`${tokenURL}`} target="_blank">
-        <Typography variant="button">Login Token</Typography>
+        <Typography variant="button">Get Login Token</Typography>
       </Button>
     );
   };
