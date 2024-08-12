@@ -6,6 +6,7 @@ catalog/
 *.tgz
 
 plugins/firelink/dist-scalprum/
+plugins/firelink/dist-dynamic/
 plugins/firelink/dist/
 
 # Logs
