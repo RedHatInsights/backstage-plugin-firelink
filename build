@@ -1,10 +1,10 @@
 #!/bin/bash
 
 yarn workspace @redhatinsights/backstage-plugin-firelink export-dynamic
-cd plugins/firelink
+cd plugins/firelink/dist-dynamic
 rm *.tgz
 npm pack
-cd ../..
+cd ../../..
 rm *.tgz
-mv plugins/firelink/*.tgz .
+mv plugins/firelink/dist-dynamic/*.tgz .
 shasum -a 256 *.tgz | awk '{print $1}' | xxd -r -p | base64
